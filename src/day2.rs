@@ -63,9 +63,9 @@ struct State1 {
 
 fn move_sub1(state: State1, command: &Command) -> State1 {
     return match command {
-        Command::Forward { val } => State1 { pos: state.pos + val, depth: state.depth },
-        Command::Down { val } => State1 { pos: state.pos, depth: state.depth + val },
-        Command::Up { val } => State1 { pos: state.pos, depth: state.depth - val },
+        Command::Forward { val } => State1 { pos: state.pos + val, ..state },
+        Command::Down { val } => State1 { depth: state.depth + val, ..state },
+        Command::Up { val } => State1 { depth: state.depth - val, ..state },
         _ => state
     };
 }
@@ -84,9 +84,9 @@ struct State2 {
 
 fn move_sub2(state: State2, command: &Command) -> State2 {
     return match command {
-        Command::Forward { val } => State2 { pos: state.pos + val, depth: state.depth + state.aim * val, aim: state.aim },
-        Command::Down { val } => State2 { pos: state.pos, depth: state.depth, aim: state.aim + val },
-        Command::Up { val } => State2 { pos: state.pos, depth: state.depth, aim: state.aim - val },
+        Command::Forward { val } => State2 { pos: state.pos + val, depth: state.depth + state.aim * val, ..state },
+        Command::Down { val } => State2 { aim: state.aim + val, ..state },
+        Command::Up { val } => State2 { aim: state.aim - val, ..state },
         _ => state
     };
 }
