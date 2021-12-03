@@ -84,7 +84,7 @@ impl BinNumber {
     }
 
     fn least_common(&self) -> i32 {
-        return (self.most_common() != 0).not() as i32;
+        return (self.most_common() != 1) as i32;
     }
 
     fn negate(&self) -> BinNumber {
