@@ -20,19 +20,16 @@ impl Numbers {
         };
     }
     fn filter_by_bit_pos(&self, pos: usize, bit: i32) -> Numbers {
-        let pred: fn((&BinNumber, usize, i32)) -> bool;
-        if self.is_singular() {
-            pred = |(number, pos, bit)| true
+        return if self.is_singular() {
+            self.clone()
         } else {
-            pred = |(number, pos, bit)| number.has_bit_at_position(pos, bit)
-        }
-        let matching = self.numbers
-            .iter()
-            .filter(|&number| pred((number, pos, bit)))
-            .map(BinNumber::clone)
-            .collect_vec();
-        return Numbers {
-            numbers: matching
+            Numbers {
+                numbers: self.numbers
+                    .iter()
+                    .filter(|&number| number.has_bit_at_position(pos, bit))
+                    .map(BinNumber::clone)
+                    .collect_vec()
+            }
         };
     }
     fn is_singular(&self) -> bool {
