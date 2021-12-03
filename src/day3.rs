@@ -1,7 +1,5 @@
 use std::fs;
-use std::ops::Not;
-use std::ptr::null;
-use itertools::{Itertools, put_back};
+use itertools::Itertools;
 
 struct Numbers {
     numbers: Vec<BinNumber>,
