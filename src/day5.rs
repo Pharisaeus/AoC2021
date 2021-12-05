@@ -6,12 +6,6 @@ struct Point {
     y: i32,
 }
 
-impl Point {
-    fn new(x: i32, y: i32) -> Point {
-        Point { x, y }
-    }
-}
-
 struct Line {
     p1: Point,
     p2: Point,
@@ -24,8 +18,8 @@ impl Line {
             .map(|x| x.parse().unwrap())
             .collect_vec();
         Line {
-            p1: Point::new(numbers[0], numbers[1]),
-            p2: Point::new(numbers[2], numbers[3]),
+            p1: Point { x: numbers[0], y: numbers[1] },
+            p2: Point { x: numbers[2], y: numbers[3] },
         }
     }
     fn is_straight(&self) -> bool {
