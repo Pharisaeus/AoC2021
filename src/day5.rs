@@ -60,30 +60,29 @@ impl Board {
             .count() as i32;
     }
 
-    fn mark_field(&mut self, x: &usize, y: &usize) {
+    fn mark_field(mut self, x: &usize, y: &usize) -> Board {
         self.board[*x][*y] += 1;
+        return self;
     }
 
-    fn mark_line(&mut self, line: &Line) {
+    fn mark_line(self, line: &Line) -> Board {
         line.covered_fields()
             .iter()
-            .for_each(|(x, y)| self.mark_field(x, y));
+            .fold(self, |board, (x, y)| board.mark_field(x, y))
     }
 }
 
 fn part1(lines: &Vec<Line>) -> i32 {
-    let mut board = Board::new(1000, 1000);
     lines.iter()
         .filter(|line| line.is_straight())
-        .for_each(|line| board.mark_line(line));
-    board.count_above_threshold(2)
+        .fold(Board::new(1000, 1000), |board, line| board.mark_line(line))
+        .count_above_threshold(2)
 }
 
 fn part2(lines: &Vec<Line>) -> i32 {
-    let mut board = Board::new(1000, 1000);
     lines.iter()
-        .for_each(|line| board.mark_line(line));
-    board.count_above_threshold(2)
+        .fold(Board::new(1000, 1000), |board, line| board.mark_line(line))
+        .count_above_threshold(2)
 }
 
 fn load_data(name: &str) -> Vec<Line> {
