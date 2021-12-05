@@ -2,17 +2,17 @@ use std::fs;
 
 fn part1(data: &[i32]) -> usize {
     let pairs = data.iter().zip(data.iter().skip(1));
-    return pairs
+    pairs
         .filter(|(x, y)| x < y)
-        .count();
+        .count()
 }
 
 fn part2(data: &[i32]) -> usize {
-    let sum_of_three:Vec<i32> = data
+    let sum_of_three: Vec<i32> = data
         .windows(3)
         .map(|chunk| chunk.iter().sum())
         .collect();
-    return part1(&sum_of_three);
+    part1(&sum_of_three)
 }
 
 pub(crate) fn solve() {
