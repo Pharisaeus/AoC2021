@@ -8,12 +8,20 @@ mod day7;
 mod day8;
 
 fn main() {
+    println!("Day 1");
     day1::solve();
+    println!("Day 2");
     day2::solve();
+    println!("Day 3");
     day3::solve();
+    println!("Day 4");
     day4::solve();
+    println!("Day 5");
     day5::solve();
+    println!("Day 6");
     day6::solve();
+    println!("Day 7");
     day7::solve();
+    println!("Day 8");
     day8::solve();
 }
