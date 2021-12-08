@@ -21,7 +21,7 @@ fn part1(numbers: &Vec<i32>, rounds: i32) -> i64 {
                     new_fish = add(new_fish, 8, count);
                 }
                 _ => {
-                    new_fish = add(new_fish, (days - 1), count);
+                    new_fish = add(new_fish, days - 1, count);
                 }
             }
         }
