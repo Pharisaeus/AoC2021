@@ -1,4 +1,4 @@
-use std::collections::{HashMap, HashSet};
+use std::collections::HashSet;
 use std::fs::read_to_string;
 use std::ops::Add;
 use itertools::Itertools;
