@@ -17,7 +17,7 @@ impl Graph {
                 .map(move |j| ((i, j), 99999))
             )
             .collect();
-        *distances.get_mut(&(0, 0)).unwrap() = 0;
+        distances.insert((0,0),0);
         Graph {
             weights,
             distances,
@@ -75,8 +75,8 @@ impl Graph {
                         for (nx, ny) in self.neighbours(x, y) {
                             if self.distances[&(nx, ny)] > self.distances[&node] + self.weight(nx, ny) {
                                 let new_weight = self.distances[&node] + self.weight(nx, ny);
-                                let key = &(nx, ny);
-                                *self.distances.get_mut(key).unwrap() = new_weight;
+                                let key = (nx, ny);
+                                self.distances.insert(key,new_weight);
                             }
                         }
                     }
