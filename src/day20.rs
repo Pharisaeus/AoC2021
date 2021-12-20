@@ -11,14 +11,9 @@ struct Image {
 impl Image {
     fn enhance(&self) -> Image {
         let (sx, ex, sy, ey) = self.ranges();
-        let mut res = HashSet::new();
-        for i in sx - 3..ex + 4 {
-            for j in sy - 3..ey + 4 {
-                if self.is_enhanced_white(i, j, sx, ex, sy, ey) {
-                    res.insert((i, j));
-                }
-            }
-        }
+        let res: HashSet<(i32, i32)> = (sx - 3..ex + 4).zip(sy - 3..ey + 4)
+            .filter(|(i, j)| self.is_enhanced_white(*i, *j, sx, ex, sy, ey))
+            .collect();
         Image {
             data: res,
             enh: self.enh.clone(),
@@ -90,14 +85,12 @@ pub(crate) fn solve() {
     let dataset = read_to_string("20.txt").unwrap();
     let x = dataset.split("\n\n").collect_vec();
     let enh = x[0].chars().collect_vec();
-    let mut collapsed = HashSet::new();
-    for (i, line) in x[1].split("\n").enumerate() {
-        for (j, c) in line.chars().enumerate() {
-            if c == '#' {
-                collapsed.insert((i as i32, j as i32));
-            }
-        }
-    }
+    let collapsed: HashSet<(i32, i32)> = x[1].split("\n").enumerate()
+        .flat_map(|(i, line)| line.chars().enumerate()
+            .filter(|(j, c)| *c == '#')
+            .map(move |(j, c)| (i as i32, j as i32))
+        )
+        .collect();
     let img = &Image {
         data: collapsed,
         enh,
