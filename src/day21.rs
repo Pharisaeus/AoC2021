@@ -10,20 +10,14 @@ fn part1(p1: i32, p2: i32) -> i32 {
     while (s1 < 1000) & (s2 < 1000) {
         let steps = dice * 3 + 3;
         dice = dice + 3;
-        p1 = (p1 + steps) % 10;
-        if p1 == 0 {
-            p1 = 10;
-        }
+        p1 = (p1 + steps - 1) % 10 + 1;
         s1 += p1;
         if s1 >= 1000 {
             break;
         }
         let steps = dice * 3 + 3;
         dice = dice + 3;
-        p2 = (p2 + steps) % 10;
-        if p2 == 0 {
-            p2 = 10;
-        }
+        p2 = (p2 + steps - 1) % 10 + 1;
         s2 += p2
     }
     return (dice - 1) * s1.min(s2);
@@ -74,16 +68,10 @@ fn simulate(state: &State, cache: &mut HashMap<State, (i128, i128)>) -> (i128, i
         let (mut p1, mut p2, mut s1, mut s2) = (state.p1, state.p2, state.s1, state.s2);
         let steps: i32 = state.dices.iter().sum();
         if state.is_p1_turn {
-            p1 = (p1 + steps) % 10;
-            if p1 == 0 {
-                p1 = 10;
-            }
+            p1 = (p1 + steps - 1) % 10 + 1;
             s1 += p1
         } else {
-            p2 = (p2 + steps) % 10;
-            if p2 == 0 {
-                p2 = 10;
-            }
+            p2 = (p2 + steps - 1) % 10 + 1;
             s2 += p2
         }
         if s1 >= 21 {
