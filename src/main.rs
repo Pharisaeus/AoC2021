@@ -15,6 +15,7 @@ mod day14;
 mod day15;
 mod day16;
 mod day20;
+mod day21;
 
 fn main() {
     // println!("Day 1");
@@ -49,6 +50,8 @@ fn main() {
     // day15::solve();
     // println!("Day 16");
     // day16::solve();
-    println!("Day 20");
-    day20::solve();
+    // println!("Day 20");
+    // day20::solve();
+    println!("Day 21");
+    day21::solve();
 }
